@@ -11,6 +11,7 @@ int main(int argc, char *argv[]){
 	int fieldSize[13] = {6,6,3,8,7,6,3,6,5,6,4,6,5};
 	char **enter;
 	FILE *file;
+
 	// allocating memory
 	ent = malloc(15*sizeof(char));
 
@@ -20,9 +21,11 @@ int main(int argc, char *argv[]){
 	while(1){
 		printf("What entry type, or x to quit? ");
 		fgets(ent,sizeof(char)*15,stdin);
+
 		if(ent[0] == '\n'){
 			ent[0] = '\0';
 		}
+
 		ent[strlen(ent)-1]='\0';
 
 		if(strcmp(ent,"x") == 0){
@@ -32,8 +35,11 @@ int main(int argc, char *argv[]){
 		for(i=0;i<13;i++){
 			if(strcmp(ent,entries[i]) == 0){
 			len = fieldSize[i];
+
 			enter = malloc(sizeof(char*)*len);
+
 			fprintf(file,"@%s{",ent);
+
 				for(j=0;j<len;j++){
 					enter[j] = malloc(sizeof(char)*200);
 
