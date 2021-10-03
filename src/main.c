@@ -1,7 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+// this will have what entries are need as arries, can actually define array size in here too.
 int main(){
-	printf("Hello world\n");
+	// declariung variables
+	int i;
+	char *ent;
+	char *entries[15] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
+
+	// allocating memory
+	ent = malloc(15*sizeof(char));
+
+	while(1){
+		printf("What entry type?\n");
+		scanf("%s",ent);
+		
+		for(i=0;i<13;i++){
+			if(strcmp(ent,entries[i]) == 0){
+				printf("%s\n",entries[i]); // this gets entry type, need to figure out how it will write from here getting it to ask for the entries is trivial, can have a struct with a *article[] that can store the info
+			}
+		}
+		break;
+	}
+
+	// freeing memory
+	free(ent);
 }
 
 
@@ -18,3 +42,4 @@ int main(){
 
 // - add tests if possible and can run the tests with the makefile, not particularly important for this but just something to consider
 // - find a way to give the link that can create another file that is a list of links with associated key names, can then search to find the link where the article is located etc.
+// - header file can include my function prototypes - not that I think there will be too many
