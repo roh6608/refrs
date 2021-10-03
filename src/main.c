@@ -5,6 +5,7 @@
 int main(int argc, char *argv[]){
 	// declaring variables
 	int i,j,len;
+	char con;
 	char *ent;
 	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
 	char fields[13][7][15] = {{"key","author","title","journal","year"},{"key","author","title","publisher","year"},{"key","title"},{"key","author","title","chapter","pages","publisher","year"},{"key","author","title","booktitle","publisher","year"},{"key","author","title","booktitle","year"},{"key","title"},{"key","author","title","school","year"},{"key"},{"key","author","title","school","year"},{"key","title","year"},{"key","author","title","institution","year"},{"key","author","title","note"}};
@@ -42,7 +43,14 @@ int main(int argc, char *argv[]){
 				}
 			}
 		}
-		break; // before break ask user if they would like to continue writing entries.
+		printf("Would you like to continue? y/n\n");
+		scanf(" %c",&con);
+
+		if(con == 'y'){
+			continue;
+		} else if(con == 'n'){
+			break;
+		}
 	}
 
 	// freeing memory and clsing file
