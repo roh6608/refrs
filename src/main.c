@@ -19,7 +19,7 @@ int main(){
 	file = fopen("dat.bib","a");
 
 	while(1){
-		printf("What entry type?\n");
+		printf("What entry type?\t");
 		scanf("%s",ent);
 		
 
