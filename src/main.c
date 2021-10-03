@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]){
 	// declaring variables
-	int i,j,len;
+	int i,j,k,len;
 	char *ent;
 	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
 	char fields[13][8][15] = {{"key","author","title","journal","year","note"},{"key","author","title","publisher","year","note"},{"key","title","note"},{"key","author","title","chapter","pages","publisher","year","note"},{"key","author","title","booktitle","publisher","year","note"},{"key","author","title","booktitle","year","note"},{"key","title","note"},{"key","author","title","school","year","note"},{"key","author","title","howpublished","note"},{"key","author","title","school","year","note"},{"key","title","year","note"},{"key","author","title","institution","year","note"},{"key","author","title","note","note"}};
@@ -14,6 +14,8 @@ int main(int argc, char *argv[]){
 
 	// allocating memory
 	ent = malloc(15*sizeof(char));
+	enter = malloc(sizeof(char)*8);
+
 
 	// opening file
 	file = fopen(argv[1],"a");
@@ -36,8 +38,8 @@ int main(int argc, char *argv[]){
 			if(strcmp(ent,entries[i]) == 0){
 			len = fieldSize[i];
 
-			enter = malloc(sizeof(char*)*len);
-
+			enter = realloc(enter, sizeof(char*)*len);
+        
 			fprintf(file,"@%s{",ent);
 
 				for(j=0;j<len;j++){
@@ -56,11 +58,15 @@ int main(int argc, char *argv[]){
 					else if(j<len-1 && j !=0){
 						fprintf(file,"%s = {%s},\n",fields[i][j],enter[j]);
 					} else if(j==len-1){
-						fprintf(file,"%s = {%s}}\n",fields[i][j], enter[j]);
+						fprintf(file,"%s = {%s}}\n\n",fields[i][j], enter[j]);
 					}
+				}
+				for(k=0;k<len;k++){
+					free(enter[k]);
 				}
 			}
 		}
+		free(enter);
 	}
 
 
