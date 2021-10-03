@@ -15,3 +15,6 @@ int main(){
 // - make the program easily extensible
 // - take command line flags and file name as arguments in the main function, then have a parser or something for the 
 // options so that mroe options can be added easily.
+
+// - add tests if possible and can run the tests with the makefile, not particularly important for this but just something to consider
+// - find a way to give the link that can create another file that is a list of links with associated key names, can then search to find the link where the article is located etc.
