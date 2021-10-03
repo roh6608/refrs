@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-// this will have what entries are need as arries, can actually define array size in here too.
 int main(){
-	// declariung variables
+	// declaring variables
 	int i,j,len;
 	char *ent;
 	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
@@ -31,7 +30,7 @@ int main(){
 				for(j=0;j<len;j++){
 					enter[j] = malloc(sizeof(char)*200);
 					printf("%s:\t",fields[i][j]);
-					scanf("%s",enter[j]); // most likely just after here, can free memory after file is written as well
+					scanf("%s",enter[j]);
 					if(j==0){
 						fprintf(file,"%s,\n",enter[j]);
 					}
@@ -43,26 +42,10 @@ int main(){
 				}
 			}
 		}
-		break; // before break ask user if they would like to continue.
+		break; // before break ask user if they would like to continue writing entries.
 	}
 
 	// freeing memory and clsing file
 	free(ent);
 	fclose(file);
 }
-
-
-//To-do
-//- character double pointer of all the possible entry types
-//- structs for each of the entry types
-//- use fopen and fprintf to write to the file
-//- use scanf to read strings in for each of them
-//-make efficient both in a usage sense and a coding sense try and reduce the amount of re-writing similar stuff
-// so prototype properly etc. encapsulate in functions, possible use header file for the data structure sort of things
-// - make the program easily extensible
-// - take command line flags and file name as arguments in the main function, then have a parser or something for the 
-// options so that mroe options can be added easily.
-
-// - add tests if possible and can run the tests with the makefile, not particularly important for this but just something to consider
-// - find a way to give the link that can create another file that is a list of links with associated key names, can then search to find the link where the article is located etc.
-// - header file can include my function prototypes - not that I think there will be too many
