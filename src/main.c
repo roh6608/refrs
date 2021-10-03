@@ -5,10 +5,10 @@
 // this will have what entries are need as arries, can actually define array size in here too.
 int main(){
 	// declariung variables
-	int i;
+	int i,j;
 	char *ent;
-	char *entries[15] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
-
+	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
+	char fields[13][6][15] = {{"author","title","journal","year"},{"author","title","publisher","year"},{"title"},{"author","title","chapter","pages","publisher","year"},{"author","title","booktitle","publisher","year"},{"author","title","booktitle","year"},{"title"},{"author","title","school","year"},{},{"author","title","school","year"},{"title","year"},{"author","title","institution","year"},{"author","title","note"}};
 	// allocating memory
 	ent = malloc(15*sizeof(char));
 
@@ -18,7 +18,10 @@ int main(){
 		
 		for(i=0;i<13;i++){
 			if(strcmp(ent,entries[i]) == 0){
-				printf("%s\n",entries[i]); // this gets entry type, need to figure out how it will write from here getting it to ask for the entries is trivial, can have a struct with a *article[] that can store the info
+			size_t len = sizeof fields[0]/sizeof fields[0][0];
+				for(j=0;j<len;j++){
+					printf("%s\n",fields[i][j]); // can get what entries are required, now need a way to fill these fields, probably make an empty array with similar size of fields and have to malloc,realloc,free and get each value in then write to the file
+				}
 			}
 		}
 		break;
