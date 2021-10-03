@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(){
+int main(int argc, char *argv[]){
 	// declaring variables
 	int i,j,len;
 	char *ent;
@@ -15,7 +15,7 @@ int main(){
 	ent = malloc(15*sizeof(char));
 
 	// opening file
-	file = fopen("dat.bib","a");
+	file = fopen(argv[1],"a");
 
 	while(1){
 		printf("What entry type?\t");
