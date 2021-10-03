@@ -66,11 +66,11 @@ int main(int argc, char *argv[]){
 				}
 			}
 		}
-		free(enter);
 	}
 
 
 	// freeing memory and clsing file
 	free(ent);
+	free(enter);
 	fclose(file);
 }
