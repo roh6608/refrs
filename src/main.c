@@ -5,10 +5,11 @@
 int main(int argc, char *argv[]){
 	// declaring variables
 	int i,j,len;
+	char con;
 	char *ent;
 	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
-	char fields[13][7][15] = {{"key","author","title","journal","year"},{"key","author","title","publisher","year"},{"key","title"},{"key","author","title","chapter","pages","publisher","year"},{"key","author","title","booktitle","publisher","year"},{"key","author","title","booktitle","year"},{"key","title"},{"key","author","title","school","year"},{"key"},{"key","author","title","school","year"},{"key","title","year"},{"key","author","title","institution","year"},{"key","author","title","note"}};
-	int fieldSize[13] = {5,5,2,7,6,5,2,5,1,5,3,5,4};
+	char fields[13][8][15] = {{"key","author","title","journal","year","note"},{"key","author","title","publisher","year","note"},{"key","title","note"},{"key","author","title","chapter","pages","publisher","year","note"},{"key","author","title","booktitle","publisher","year","note"},{"key","author","title","booktitle","year","note"},{"key","title","note"},{"key","author","title","school","year","note"},{"key","author","title","howpublished","note"},{"key","author","title","school","year","note"},{"key","title","year","note"},{"key","author","title","institution","year","note"},{"key","author","title","note","note"}};
+	int fieldSize[13] = {6,6,3,8,7,6,3,6,5,6,4,6,5};
 	char **enter;
 	FILE *file;
 	// allocating memory
@@ -42,7 +43,14 @@ int main(int argc, char *argv[]){
 				}
 			}
 		}
-		break; // before break ask user if they would like to continue writing entries.
+		printf("Would you like to continue? y/n\n");
+		scanf(" %c",&con);
+
+		if(con == 'y'){
+			continue;
+		} else if(con == 'n'){
+			break;
+		}
 	}
 
 	// freeing memory and clsing file
