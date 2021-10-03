@@ -6,7 +6,7 @@ int main(int argc, char *argv[]){
 	// declaring variables
 	int i,j,k,len;
 	char *ent;
-	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
+	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis","proceedings", "techreport", "unpublished"};
 	char fields[13][8][15] = {{"key","author","title","journal","year","note"},{"key","author","title","publisher","year","note"},{"key","title","note"},{"key","author","title","chapter","pages","publisher","year","note"},{"key","author","title","booktitle","publisher","year","note"},{"key","author","title","booktitle","year","note"},{"key","title","note"},{"key","author","title","school","year","note"},{"key","author","title","howpublished","note"},{"key","author","title","school","year","note"},{"key","title","year","note"},{"key","author","title","institution","year","note"},{"key","author","title","note","note"}};
 	int fieldSize[13] = {6,6,3,8,7,6,3,6,5,6,4,6,5};
 	char **enter;
