@@ -5,30 +5,50 @@
 // this will have what entries are need as arries, can actually define array size in here too.
 int main(){
 	// declariung variables
-	int i,j;
+	int i,j,len;
 	char *ent;
 	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
-	char fields[13][6][15] = {{"author","title","journal","year"},{"author","title","publisher","year"},{"title"},{"author","title","chapter","pages","publisher","year"},{"author","title","booktitle","publisher","year"},{"author","title","booktitle","year"},{"title"},{"author","title","school","year"},{},{"author","title","school","year"},{"title","year"},{"author","title","institution","year"},{"author","title","note"}};
+	char fields[13][7][15] = {{"key","author","title","journal","year"},{"key","author","title","publisher","year"},{"key","title"},{"key","author","title","chapter","pages","publisher","year"},{"key","author","title","booktitle","publisher","year"},{"key","author","title","booktitle","year"},{"key","title"},{"key","author","title","school","year"},{"key"},{"key","author","title","school","year"},{"key","title","year"},{"key","author","title","institution","year"},{"key","author","title","note"}};
+	int fieldSize[13] = {5,5,2,7,6,5,2,5,1,5,3,5,4};
+	char **enter;
+	FILE *file;
 	// allocating memory
 	ent = malloc(15*sizeof(char));
+
+	// opening file
+	file = fopen("dat.bib","a");
 
 	while(1){
 		printf("What entry type?\n");
 		scanf("%s",ent);
 		
+
 		for(i=0;i<13;i++){
 			if(strcmp(ent,entries[i]) == 0){
-			size_t len = sizeof fields[0]/sizeof fields[0][0];
+			len = fieldSize[i];
+			enter = malloc(sizeof(char*)*len);
+			fprintf(file,"@%s{",ent);
 				for(j=0;j<len;j++){
-					printf("%s\n",fields[i][j]); // can get what entries are required, now need a way to fill these fields, probably make an empty array with similar size of fields and have to malloc,realloc,free and get each value in then write to the file
+					enter[j] = malloc(sizeof(char)*200);
+					printf("%s:\t",fields[i][j]);
+					scanf("%s",enter[j]); // most likely just after here, can free memory after file is written as well
+					if(j==0){
+						fprintf(file,"%s,\n",enter[j]);
+					}
+					else if(j<len-1 && j !=0){
+						fprintf(file,"%s = {%s},\n",fields[i][j],enter[j]);
+					} else if(j==len-1){
+						fprintf(file,"%s = {%s}}\n",fields[i][j], enter[j]);
+					}
 				}
 			}
 		}
-		break;
+		break; // before break ask user if they would like to continue.
 	}
 
-	// freeing memory
+	// freeing memory and clsing file
 	free(ent);
+	fclose(file);
 }
 
 
