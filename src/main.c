@@ -5,7 +5,6 @@
 int main(int argc, char *argv[]){
 	// declaring variables
 	int i,j,len;
-	char con;
 	char *ent;
 	char *entries[] = {"article", "book", "booklet", "inbook", "incollection", "inproceedings", "manual", "mastersthesis", "misc", "phdthesis", "misc", "phdthesis", "proceedings", "techreport", "unpublished"};
 	char fields[13][8][15] = {{"key","author","title","journal","year","note"},{"key","author","title","publisher","year","note"},{"key","title","note"},{"key","author","title","chapter","pages","publisher","year","note"},{"key","author","title","booktitle","publisher","year","note"},{"key","author","title","booktitle","year","note"},{"key","title","note"},{"key","author","title","school","year","note"},{"key","author","title","howpublished","note"},{"key","author","title","school","year","note"},{"key","title","year","note"},{"key","author","title","institution","year","note"},{"key","author","title","note","note"}};
@@ -19,9 +18,16 @@ int main(int argc, char *argv[]){
 	file = fopen(argv[1],"a");
 
 	while(1){
-		printf("What entry type?\t");
-		scanf("%s",ent);
-		
+		printf("What entry type, or x to quit? ");
+		fgets(ent,sizeof(char)*15,stdin);
+		if(ent[0] == '\n'){
+			ent[0] = '\0';
+		}
+		ent[strlen(ent)-1]='\0';
+
+		if(strcmp(ent,"x") == 0){
+			break;
+		}
 
 		for(i=0;i<13;i++){
 			if(strcmp(ent,entries[i]) == 0){
@@ -30,8 +36,14 @@ int main(int argc, char *argv[]){
 			fprintf(file,"@%s{",ent);
 				for(j=0;j<len;j++){
 					enter[j] = malloc(sizeof(char)*200);
-					printf("%s:\t",fields[i][j]);
-					scanf("%s",enter[j]);
+
+					printf("%s: ",fields[i][j]);
+
+					fgets(enter[j],sizeof(char)*200, stdin);
+					if((strlen(enter[j]) > 0) && (enter[j][strlen(enter[j])-1] == '\n')){
+						enter[j][strlen(enter[j])-1]='\0';
+					}
+
 					if(j==0){
 						fprintf(file,"%s,\n",enter[j]);
 					}
@@ -43,15 +55,8 @@ int main(int argc, char *argv[]){
 				}
 			}
 		}
-		printf("Would you like to continue? y/n\n");
-		scanf(" %c",&con);
-
-		if(con == 'y'){
-			continue;
-		} else if(con == 'n'){
-			break;
-		}
 	}
+
 
 	// freeing memory and clsing file
 	free(ent);
