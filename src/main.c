@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define STRLEN 256
+#define WRDLEN 15
+
 int main(int argc, char *argv[]){
 	// declaring variables
 	int i,j,len;
@@ -13,8 +16,8 @@ int main(int argc, char *argv[]){
 	FILE *file;
 
 	// allocating memory
-	ent = malloc(15*sizeof(char));
-	enter = malloc(sizeof(char)*200);
+	ent = malloc(WRDLEN);
+	enter = malloc(STRLEN);
 
 
 	// opening file
