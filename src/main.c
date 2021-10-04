@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define STRLEN 256
-#define WRDLEN 15
+#define WRDLEN 16
 
 int main(int argc, char *argv[]){
 	// declaring variables
@@ -25,13 +25,11 @@ int main(int argc, char *argv[]){
 
 	while(1){
 		printf("What entry type, or x to quit? ");
-		fgets(ent,sizeof(char)*15,stdin);
+		fgets(ent,WRDLEN,stdin);
 
-		if(ent[0] == '\n'){
-			ent[0] = '\0';
+		if((strlen(ent) > 0) && (ent[strlen(ent)-1] == '\n')){
+			ent[strlen(ent)-1]='\0';
 		}
-
-		ent[strlen(ent)-1]='\0';
 
 		if(strcmp(ent,"x") == 0){
 			break;
@@ -47,7 +45,7 @@ int main(int argc, char *argv[]){
 
 					printf("%s: ",fields[i][j]);
 
-					fgets(enter,sizeof(char)*200, stdin);
+					fgets(enter,STRLEN, stdin);
 					if((strlen(enter) > 0) && (enter[strlen(enter)-1] == '\n')){
 						enter[strlen(enter)-1]='\0';
 					}
