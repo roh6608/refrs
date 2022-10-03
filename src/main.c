@@ -21,6 +21,10 @@ int main(int argc, char *argv[]){
 
 
 	// opening file
+	if(argv[1] == NULL){
+		fprintf(stderr, "Please specify a file!\n");
+		return 0;
+	}
 	file = fopen(argv[1],"a");
 
 	while(1){
